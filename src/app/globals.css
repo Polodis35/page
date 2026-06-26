@@ -1,0 +1,179 @@
+@import "tailwindcss";
+
+/* ── Tailwind v4 Theme Tokens ─────────────────────────────── */
+@theme inline {
+  /* Colors */
+  --color-bg: #1a1b13;
+  --color-bg-elevated: #232520;
+  --color-surface: #2a2c26;
+  --color-border: rgba(199, 193, 170, 0.10);
+  --color-border-strong: rgba(199, 193, 170, 0.20);
+  --color-text: #c7c1aa;
+  --color-text-muted: rgba(199, 193, 170, 0.62);
+  --color-accent: #93c93c;
+  --color-accent-bright: #a8dc4f;
+  --color-olive: #38501d;
+  --color-ebony: #59584c;
+
+  /* Fonts */
+  --font-display: "Syne", sans-serif;
+  --font-body: "Manrope", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Custom spacing */
+  --spacing-section: 7rem;
+  --spacing-section-sm: 4rem;
+}
+
+/* ── Base Resets ──────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Turkish-safe text wrapping */
+h1, h2, h3, h4, h5, h6, p, span, a, li, label {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* ── Inspector Frame Focus State ─────────────────────────── */
+@keyframes inspector-frame-in {
+  0% {
+    clip-path: inset(50% 50% 50% 50%);
+    opacity: 0;
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+
+/* Focus styles for inputs */
+.inspector-focus {
+  position: relative;
+}
+
+.inspector-focus::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border: 1px solid transparent;
+  pointer-events: none;
+  z-index: 1;
+  transition: border-color 0.2s ease;
+}
+
+.inspector-focus:focus-within::before {
+  border-color: var(--color-accent);
+  animation: inspector-frame-in 0.25s ease-out;
+}
+
+/* Corner brackets for focus - top-left */
+.inspector-focus::after {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: 12px;
+  height: 12px;
+  border-top: 1.5px solid transparent;
+  border-left: 1.5px solid transparent;
+  pointer-events: none;
+  z-index: 2;
+  transition: border-color 0.2s ease;
+}
+
+.inspector-focus:focus-within::after {
+  border-top-color: var(--color-accent);
+  border-left-color: var(--color-accent);
+}
+
+/* Decorative layer z-index utility */
+.decorative-layer {
+  pointer-events: none;
+  z-index: 0;
+}
+
+.content-layer {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Caret Blink for CTA ─────────────────────────────────── */
+@keyframes caret-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.caret-blink {
+  animation: caret-blink 1.06s step-end infinite;
+}
+
+/* ── Scrollbar Styling ───────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-ebony);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
+}
+
+/* ── Selection ───────────────────────────────────────────── */
+::selection {
+  background: rgba(147, 201, 60, 0.3);
+  color: var(--color-text);
+}
+
+/* ── Reduced Motion ──────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Premium Grid Pattern ───────────────────────────────── */
+.bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(147, 201, 60, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(147, 201, 60, 0.03) 1px, transparent 1px);
+  background-size: 80px 80px;
+  background-position: center top;
+}
+
+/* ── Icon Filters from Reference ─────────────────────────── */
+.filter-icon-normal {
+  filter: brightness(0) saturate(100%) invert(94%) sepia(34%) saturate(1017%) hue-rotate(38deg) brightness(101%) contrast(86%);
+}
+.group:hover .filter-icon-hover {
+  filter: brightness(0) saturate(100%) invert(8%) sepia(6%) saturate(1246%) hue-rotate(155deg) brightness(95%) contrast(92%);
+}
